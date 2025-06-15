@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
  const connecetDB = () => {
   mongoose
-    .connect(process.env.DB_URL)
+    .connect("mongodb+srv://akramsayed330:M.mten200@cluster0.ltrg0.mongodb.net/tomatoConnect")
     .then((result) => {
     //   console.log(result);
       console.log("connected to DB successfully");
