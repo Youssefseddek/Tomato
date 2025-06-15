@@ -10,7 +10,6 @@ const baseUrl = process.env.BASE_URL || '/api/v1'
 
 app.use(express.json());
 
-app.use(`${baseUrl}/uploads`,express.static('./uploads'))
 
 app.use(`${baseUrl}/auth`,indexRouter.authRouter)
 app.use(`${baseUrl}/user`,indexRouter.userRouter)
