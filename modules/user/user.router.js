@@ -7,6 +7,6 @@ const router = Router();
 router.get("/", userController.getUsers);
 
 
-router.post("/addImage",myMulter(validationTypes.image,'user/profilePic').single('image'),HME, userController.addImage);
+router.post("/addImage",myMulter(validationTypes.image).single('image'),HME, userController.addImage);
 
 export default router;

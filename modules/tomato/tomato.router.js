@@ -10,10 +10,10 @@ const router = Router()
 router.get("/",auth(), tomatoController.getTomato);
 
 // add tomato
-router.post("/addTomato",auth(),myMulter(validationTypes.image,'tomato').single('photo'), tomatoController.addTomato)
+router.post("/addTomato",auth(),myMulter(validationTypes.image).single('photo'), tomatoController.addTomato)
 
 // update tomato Photo
-router.put("/updateTomatoPhoto/:id",auth(),myMulter(validationTypes.image,'tomato').single('photo'), tomatoController.updateTomatoPhoto )
+router.put("/updateTomatoPhoto/:id",auth(),myMulter(validationTypes.image).single('photo'), tomatoController.updateTomatoPhoto )
 
 
 export default router

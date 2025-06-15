@@ -1,4 +1,5 @@
 import userModel from "../../../DB/model/user.model.js";
+import cloudinary from "../../../services/cloudinary.js";
 
 export const getUsers = async (req, res) => {
   const user = await userModel.find();
@@ -11,10 +12,8 @@ export const addImage = async (req, res) => {
   } else {
     console.log(req.file);
 
-    const image = req.file.destination + "/" + req.file.filename;
-    console.log(image);
-
-    
+    const { secure_url } = await cloudinary.uploader.upload(req.file.path, { folder: "tomatoConnect/user" });
+    console.log(secure_url);
 
   }
 };

@@ -1,4 +1,5 @@
 import Tomato from "../../../DB/model/tomatoes.model.js";
+import cloudinary from "../../../services/cloudinary.js";
 
 
 // get all tomatoes
@@ -23,8 +24,8 @@ export const addTomato = async (req, res) => {
             return res.status(400).json({ message: "All fields are required" })
         }
         if (req.file) {
-            const photo = req.file.destination + "/" + req.file.filename
-            const tomato = await Tomato.create({ tomato_code, name, photo, createdAt })
+            const { secure_url } = await cloudinary.uploader.upload(req.file.path, { folder: "tomatoConnect/tomato" });
+            const tomato = await Tomato.create({ tomato_code, name, photo: secure_url, createdAt })
             return res.status(201).json({ message: "Tomato created successfully", tomato })
         }
         const tomato = await Tomato.create({ tomato_code, name, createdAt })
@@ -47,8 +48,8 @@ export const updateTomatoPhoto = async (req, res) => {
         //     return res.status(400).json({ message: "All fields are required" })
         // }
         if (req.file) {
-            const photo = req.file.destination + "/" + req.file.filename
-            const tomato = await Tomato.findByIdAndUpdate(id, {  photo }, { new: true })
+            const { secure_url } = await cloudinary.uploader.upload(req.file.path, { folder: "tomatoConnect/tomato" });
+            const tomato = await Tomato.findByIdAndUpdate(id, { photo: secure_url }, { new: true })
             return res.status(200).json({ message: "Tomato updated successfully", tomato })
         }
         // const tomato = await Tomato.findByIdAndUpdate(id, { tomato_code, name }, { new: true })

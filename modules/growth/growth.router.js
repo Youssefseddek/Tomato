@@ -9,10 +9,10 @@ const router = Router();
 
 
 // add new plant growth stage
-router.post('/addPlant',myMulter(validationTypes.image,'plant').single('photo'), growthController.addGrowthStage);
+router.post('/addPlant',myMulter(validationTypes.image).single('photo'), growthController.addGrowthStage);
 
 // update photo of a plant growth stage
-router.put('/updatePlantPhoto/:id', myMulter(validationTypes.image,'plant').single('photo'), growthController.updatePlantPhoto);
+router.put('/updatePlantPhoto/:id', myMulter(validationTypes.image).single('photo'), growthController.updatePlantPhoto);
 
 // update plant status
 router.put('/updatePlantStatus/:id', growthController.updatePlantStatus);
