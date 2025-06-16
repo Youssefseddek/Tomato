@@ -18,7 +18,7 @@ app.use(`${baseUrl}/tomato`,indexRouter.tomatoRouter)
 app.use(`${baseUrl}/growth`,indexRouter.growthRouter)
 
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.send("Tomato connect"));
 
 connecetDB();
 
