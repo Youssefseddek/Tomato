@@ -5,9 +5,9 @@ import { v2 as cloudinary } from 'cloudinary'
 
 // Configuration
 cloudinary.config({
-    cloud_name: 'dcsedazdk',
-    api_key: '171427446686226',
-    api_secret: 'IwKTzFb2pJexayHQR3BJPIOYq7o'
+    cloud_name: process.env.cloud_name,
+    api_key: process.env.api_key,
+    api_secret: process.env.api_secret 
 });
 
 

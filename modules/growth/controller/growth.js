@@ -36,8 +36,12 @@ export const updatePlantPhoto = async (req, res) => {
         const { id } = req.params;
 
         if (req.file) {
-            const {secure_url} = await cloudinary.uploader.upload(req.file.path, { folder: "tomatoConnect/plant" });
+            const {secure_url,public_id} = await cloudinary.uploader.upload(req.file.path, { folder: "tomatoConnect/plant" });
             const plant = await Growth.findByIdAndUpdate(id, { photo: secure_url }, { new: true });
+            if (!plant) {
+                await cloudinary.uploader.destroy(public_id); // Remove old photo from cloudinary if needed
+                return res.status(404).json({ message: "Plant not found" });
+            }
             return res.status(200).json({ message: "Plant updated successfully", plant });
         }
         
