@@ -28,22 +28,22 @@ export const signup = async (req, res) => {
             })
 
             //send email verification link
-            const token = jwt.sign({ id: newUser._id }, process.env.EMAIL_VERIFICATION_TOKEN, { expiresIn: '1h' })
-            const link = `${req.protocol}://${req.headers.host}${process.env.BASE_URL}/auth/confirmEmail/${token}`
-            const message = `
-            <a href='${link}' >Click Here To Activate your Account</a>
-            `
+            // const token = jwt.sign({ id: newUser._id }, process.env.EMAIL_VERIFICATION_TOKEN, { expiresIn: '1h' })
+            // const link = `${req.protocol}://${req.headers.host}${process.env.BASE_URL}/auth/confirmEmail/${token}`
+            // const message = `
+            // <a href='${link}' >Click Here To Activate your Account</a>
+            // `
 
-            const info = await myEmail(newUser.email, 'Email Verification', message)
-            console.log(info);
+            // const info = await myEmail(newUser.email, 'Email Verification', message)
+            // console.log(info);
 
             // save user
-            if (info.accepted.length) {
+            // if (info.accepted.length) {
                 const savedUser = await newUser.save()
                 return res.status(201).json({ message: "User created successfully", user: savedUser })
-            } else {
-                return res.status(500).json({ message: "Failed to send email" })
-            }
+            // } else {
+            //     return res.status(500).json({ message: "Failed to send email" })
+            // }
 
 
 
@@ -93,10 +93,7 @@ export const login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid password" })
         }
-        // check if email is verified   
-        if (!user.confirmEmail) {
-            return res.status(401).json({ message: "Email not verified" })
-        }
+
 
         // create token
         const token = jwt.sign({ id: user._id ,isLoggedIn:true}, process.env.JWT_SECRET, { expiresIn: 60*60*24 })

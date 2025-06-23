@@ -13,7 +13,12 @@ router.get("/",auth(), tomatoController.getTomato);
 router.post("/addTomato",auth(),myMulter(validationTypes.image).single('photo'), tomatoController.addTomato)
 
 // update tomato Photo
-router.put("/updateTomatoPhoto/:id",auth(),myMulter(validationTypes.image).single('photo'), tomatoController.updateTomatoPhoto )
+router.put("/updateTomato/:id",auth(),myMulter(validationTypes.image).single('photo'), tomatoController.updateTomatoPhoto )
 
+// delete tomato
+router.delete("/deleteTomato/:id",auth(), tomatoController.deleteTomato)
+
+// get tomato by id
+router.get("/:id",auth(), tomatoController.getTomatoById)
 
 export default router
