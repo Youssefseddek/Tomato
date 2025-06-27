@@ -23,4 +23,7 @@ router.get('/getPlants', growthController.getPlants);
 // get plant by id
 router.get('/getPlantById/:id', growthController.getPlantById);
 
+// delete plant by id
+router.delete('/deletePlant/:id', growthController.deletePlant);
+
 export default router;

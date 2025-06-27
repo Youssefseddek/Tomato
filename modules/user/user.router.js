@@ -5,7 +5,7 @@ import auth from "../../middleWare/authentication.js";
 
 const router = Router();
 
-router.get("/", userController.getUsers);
+router.get("/",auth(), userController.getUsers);
 
 
 // router.post("/addImage",myMulter(validationTypes.image).single('image'),HME, userController.addImage);

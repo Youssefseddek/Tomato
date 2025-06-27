@@ -2,7 +2,7 @@ import userModel from "../../../DB/model/user.model.js";
 import cloudinary from "../../../services/cloudinary.js";
 
 export const getUsers = async (req, res) => {
-  const user = await userModel.find();
+  const user = await userModel.findById(req.user.id).select("-password -__v");
   res.json({ message: "user", user });
 };
 

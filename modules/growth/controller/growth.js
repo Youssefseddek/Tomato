@@ -102,3 +102,25 @@ export const getPlantById = async (req, res) => {
         return res.status(500).json({ message: "Internal server error", error: error.message, stack: error.stack });
     }
 }
+
+// delete plant by id
+export const deletePlant = async (req, res) => {
+    console.log("deletePlant called with params:", req.params);
+    
+    try {
+        const { id } = req.params;
+        const plant = await Growth.findByIdAndDelete(id);
+        if (!plant) {
+            return res.status(404).json({ message: "Plant not found" });
+        }
+        // Optionally, delete the photo from cloudinary if it exists
+        // if (plant.photo) {
+        //     const public_id = plant.photo.split('/').pop().split('.')[0]; // Extract public_id from URL
+        //     await cloudinary.uploader.destroy(public_id);
+        // }
+        return res.status(200).json({ message: "Plant deleted successfully" });
+    } catch (error) {
+        return res.status(500).json({ message: "Internal server error", error: error.message, stack: error.stack });
+    }
+}
+    
