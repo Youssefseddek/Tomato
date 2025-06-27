@@ -5,7 +5,7 @@ const GrowthSchema = new mongoose.Schema({
   tomatoType: { type: String },
   plantingDate: { type: Date },
   expectedHarvestDate: { type: Date },
-  status: { type: String },
+  status: { type: String ,default:"Plant Set"},
   photo: { type: mongoose.Schema.Types.Mixed },
 
 });
